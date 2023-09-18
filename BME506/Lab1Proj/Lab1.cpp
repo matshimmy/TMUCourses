@@ -8,7 +8,16 @@ string enterDNAString() {
   return dna;
 }
 // implement the function checkValidity
-
+bool checkValidity(string s) {
+  for (int x = 0;x < s.length();x++) {
+    if (s[x] == 'A' || s[x] == 'G' || s[x] == 'T' || s[x] == 'C'
+      || s[x] == 'a' || s[x] == 'g' || s[x] == 't' || s[x] == 'c') {
+    } else {
+      return false;
+    }
+  }
+  return true;
+}
 // implement the function compliment
 
 int main() {
