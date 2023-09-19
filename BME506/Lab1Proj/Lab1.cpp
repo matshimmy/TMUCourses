@@ -84,11 +84,11 @@ int main() {
       string str1 = enterDNAString();
       cout << str1 << " (" << str1.size() << " chars)";
       bool b = checkValidity(str1);
-      // if (b == true) {
-      //   cout << " : VALID DNA";
-      //   compliment(str1);
-      // } else
-      //   cout << " : INVALID DNA";
+      if (b == true) {
+        cout << " : VALID DNA";
+        compliment(str1);
+      } else
+        cout << " : INVALID DNA";
       cout << endl;
     } else if (4 == option) {
       return 0;
