@@ -1,4 +1,3 @@
-
 #include "Lab2.h"
 #include <cmath>
 #include <cstdlib>
@@ -8,7 +7,11 @@
 // implement the function initialize
 void initialize(double &k, int &n0) {}
 // implement the function calculate
-void calculate(const double k, const int n0, double array[]) {}
+void calculate(const double k, const int n0, double array[]) {
+  for (int x = 0; x < 11; x++) {
+    cout << fixed << setprecision(3) << "\t" << x << "\t" << n0 * exp(k * x) << endl;
+  }
+}
 // implement the function display
 
 // implement the function twoDdisplay
@@ -22,6 +25,7 @@ int main(int argc, char *argv[]) {
     cout << "\tInitial population (N0) [0-1000] : ";
     cin >> n0;
     cout << "\n\tGrowth Summary:\n\n\tHour\tPopulation\n\t====\t==========\n";
+    calculate(k, n0, {});
   } else if (2 == argc) { // Part III
     // WRITE THE CODE FOR Part III HERE.
   } else if (3 == argc) { // Part II
