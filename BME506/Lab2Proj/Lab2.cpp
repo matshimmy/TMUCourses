@@ -6,7 +6,9 @@
 #include <iostream>
 
 // implement the function initialize
+void initialize(double &k, int &n0) {}
 // implement the function calculate
+void calculate(const double k, const int n0, double array[]) {}
 // implement the function display
 
 // implement the function twoDdisplay
@@ -15,6 +17,11 @@ int main(int argc, char *argv[]) {
   int n0;
   if (1 == argc) { // Part I
     // WRITE THE CODE FOR Part I HERE.
+    cout << "Initializing Bacteria:\n\tGrowth factor (k) [0.0-1.0] : ";
+    cin >> k;
+    cout << "\tInitial population (N0) [0-1000] : ";
+    cin >> n0;
+    cout << "\n\tGrowth Summary:\n\n\tHour\tPopulation\n\t====\t==========\n";
   } else if (2 == argc) { // Part III
     // WRITE THE CODE FOR Part III HERE.
   } else if (3 == argc) { // Part II
