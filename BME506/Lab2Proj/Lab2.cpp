@@ -6,7 +6,12 @@
 #include <string>
 
 // implement the function initialize
-void initialize(double &k, int &n0) {}
+void initialize(double &k, int &n0) {
+    cout << "Initializing Bacteria:\n\tGrowth factor (k) [0.0-1.0] : ";
+    cin >> k;
+    cout << "\tInitial population (N0) [0-1000] : ";
+    cin >> n0;
+}
 // implement the function calculate
 void calculate(const double k, const int n0, double array[]) {
   for (int x = 0; x < 11; x++) {
@@ -49,10 +54,7 @@ int main(int argc, char *argv[]) {
   double array[11];
   if (1 == argc) { // Part I
     // WRITE THE CODE FOR Part I HERE.
-    cout << "Initializing Bacteria:\n\tGrowth factor (k) [0.0-1.0] : ";
-    cin >> k;
-    cout << "\tInitial population (N0) [0-1000] : ";
-    cin >> n0;
+    initialize(k, n0);
     calculate(k, n0, array);
     display(array);
   } else if (2 == argc) { // Part III
@@ -60,10 +62,7 @@ int main(int argc, char *argv[]) {
     const int num = stoi(argv[1]);
     double arr[num][11];
     for (int x = 0; x < num; x++) {
-      cout << "Initializing Bacteria:\n\tGrowth factor (k) [0.0-1.0] : ";
-      cin >> k;
-      cout << "\tInitial population (N0) [0-1000] : ";
-      cin >> n0;
+      initialize(k, n0);
       cout << endl;
       calculate(k, n0, arr[x]);
     }
