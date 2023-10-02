@@ -13,6 +13,13 @@ using namespace std;
 enum BloodType { A, AB, O, B };
 enum Organ { Hart, Kidney, Lung, Liver };
 
-struct PatientRecord {};
+struct PatientRecord {
+  string firstName;
+  string surName;
+  BloodType bloodType;
+  Organ organType;
+  int age;
+  int yearAdded;
+};
 
 #endif /* LAB4_H */
