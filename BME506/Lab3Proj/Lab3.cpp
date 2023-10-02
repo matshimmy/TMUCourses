@@ -8,7 +8,7 @@ void accessSalaryArrayByPointerArithmetic()
 {
 
   int salary[3];
-  int *psal = salary;
+  int *psal = salary;// psal is pointer to salary
 
   for (int i = 0; i < 3; ++i)
   {
@@ -36,7 +36,7 @@ void accessSalaryArrayByPointerArithmetic()
 int *sortIntegersByPointerArithmetic(int *arr, int size)
 {
   int change;
-  do
+  do // need to check if sorted at least once
   {
     change = 0;
     for (int i = 0; i < size - 1; i++)
