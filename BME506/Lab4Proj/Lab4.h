@@ -11,7 +11,7 @@
 using namespace std;
 
 enum BloodType { A, AB, O, B };
-enum Organ { Hart, Kidney, Lung, Liver };
+enum Organ { Heart, Kidney, Lung, Liver };
 
 struct PatientRecord {
   string firstName;
@@ -21,5 +21,7 @@ struct PatientRecord {
   int age;
   int yearAdded;
 };
+
+void writeFile(PatientRecord recordArray[]);
 
 #endif /* LAB4_H */
