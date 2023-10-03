@@ -1,5 +1,6 @@
 #include "Lab4.h"
-#include <cstdlib>
+#include <cstring>
+#include <climits>
 #include <iostream>
 #include <string>
 
@@ -66,28 +67,17 @@ void tokenizeAndFillup(stringstream &aStrStream, PatientRecord &patient) {
   int tokenNumber = 1;
   while (aStrStream >> token) {
     processToken(tokenNumber, token, patient);
+    cout << token << endl;
     tokenNumber = tokenNumber + 1;
   }
-}
-
-void readStrings(PatientRecord recordArray[]) {
-  string string1 = "Joe McGurk B kidney 37 2009";
-  string string2 = "Peter Milosevic A heart 28 2012";
-  // start tokenizing process
-  stringstream ss;
-  // use ss for first string
-  ss.str(string1);
-  tokenizeAndFillup(ss, recordArray[0]);
-  // reuse ss for second string
-  ss.str(""); // erase ss buffer
-  ss.clear(); // reset ss error flags
-  ss.str(string2);
-  tokenizeAndFillup(ss, recordArray[1]);
 }
 
 int main(int argc, char *argv[]) {
   int patientAmount = 0;
   int option;
+  PatientRecord *recordArray;
+  string inputLine;
+  stringstream ss;
   while (true) {
     cout << "=======================\n[Organ Transplant List]\nThere are "
             "currently "
@@ -101,6 +91,12 @@ int main(int argc, char *argv[]) {
     cout << "=============" << endl;
     if (option == 1) {
       cout << "[Add Patient]" << endl;
+      cin.clear();
+      cin.ignore(INT_MAX, '\n');
+      getline(cin, inputLine);
+      ss.clear();
+      ss.str(inputLine);
+      tokenizeAndFillup(ss, recordArray[0]);
     } else if (option == 2) {
       cout << "[Show List of Patients]" << endl;
     } else if (option == 3) {
