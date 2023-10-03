@@ -67,7 +67,6 @@ void tokenizeAndFillup(stringstream &aStrStream, PatientRecord &patient) {
   int tokenNumber = 1;
   while (aStrStream >> token) {
     processToken(tokenNumber, token, patient);
-    cout << token << endl;
     tokenNumber = tokenNumber + 1;
   }
 }
@@ -75,7 +74,7 @@ void tokenizeAndFillup(stringstream &aStrStream, PatientRecord &patient) {
 int main(int argc, char *argv[]) {
   int patientAmount = 0;
   int option;
-  PatientRecord *recordArray;
+  PatientRecord recordArray[100];
   string inputLine;
   stringstream ss;
   while (true) {
@@ -96,7 +95,8 @@ int main(int argc, char *argv[]) {
       getline(cin, inputLine);
       ss.clear();
       ss.str(inputLine);
-      tokenizeAndFillup(ss, recordArray[0]);
+      tokenizeAndFillup(ss, recordArray[patientAmount]);
+      patientAmount++;
     } else if (option == 2) {
       cout << "[Show List of Patients]" << endl;
     } else if (option == 3) {
