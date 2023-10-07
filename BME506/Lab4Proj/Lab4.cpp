@@ -5,48 +5,42 @@
 #include <string>
 
 void writeIntoFileStream(PatientRecord recordArray[],
-                         ofstream &outputFileStream) {
-  for (int i = 0; i < sizeof(recordArray) / sizeof(recordArray[0]); ++i) {
+  ofstream& outputFileStream, int patientAmount) {
+  outputFileStream << "Patients " << patientAmount << endl;
+  for (int i = 0; i < patientAmount; ++i) {
     outputFileStream << recordArray[i].firstName << " "
-                     << recordArray[i].surName << " ";
+      << recordArray[i].surName << " ";
 
-    if (A == recordArray[i].bloodType)
-      outputFileStream << "A ";
-    else if (AB == recordArray[i].bloodType)
-      outputFileStream << "AB ";
-    else if (O == recordArray[i].bloodType)
-      outputFileStream << "O ";
-    else if (B == recordArray[i].bloodType)
-      outputFileStream << "B ";
+    if (A == recordArray[i].bloodType) outputFileStream << "A ";
+    else if (AB == recordArray[i].bloodType) outputFileStream << "AB ";
+    else if (O == recordArray[i].bloodType) outputFileStream << "O ";
+    else if (B == recordArray[i].bloodType) outputFileStream << "B ";
 
-    if (Heart == recordArray[i].organType)
-      outputFileStream << "heart ";
-    else if (Kidney == recordArray[i].organType)
-      outputFileStream << "kidney ";
-    else if (Liver == recordArray[i].organType)
-      outputFileStream << "liver ";
-    else if (Lung == recordArray[i].organType)
-      outputFileStream << "lung ";
+    if (Heart == recordArray[i].organType) outputFileStream << "heart ";
+    else if (Kidney == recordArray[i].organType) outputFileStream << "kidney ";
+    else if (Liver == recordArray[i].organType) outputFileStream << "liver ";
+    else if (Lung == recordArray[i].organType) outputFileStream << "lung ";
 
     outputFileStream << recordArray[i].age << " ";
-    outputFileStream << recordArray[i].yearAdded;
+    outputFileStream << recordArray[i].yearAdded << endl;
   }
 }
 
-void writeFile(PatientRecord recordArray[]) {
+void writeFile(PatientRecord recordArray[], int patientAmount) {
   ofstream outputFileStream;
   outputFileStream.open("transplantPatients.txt");
   if (outputFileStream.is_open()) {
-    writeIntoFileStream(recordArray, outputFileStream);
+    writeIntoFileStream(recordArray, outputFileStream, patientAmount);
     outputFileStream.close();
-  } else
+  }
+  else
     cout << "Unable to open file" << endl;
 }
 
-void processToken(int tokNum, string &tok, PatientRecord &patient) {
+void processToken(int tokNum, string& tok, PatientRecord& patient) {
   if (1 == tokNum) patient.firstName = tok;
   if (2 == tokNum) patient.surName = tok;
-  if (3 == tokNum){
+  if (3 == tokNum) {
     if (0 == tok.compare("A")) patient.bloodType = A;
     else if (0 == tok.compare("AB")) patient.bloodType = AB;
     else if (0 == tok.compare("O")) patient.bloodType = O;
@@ -62,7 +56,7 @@ void processToken(int tokNum, string &tok, PatientRecord &patient) {
   if (6 == tokNum) patient.yearAdded = atoi(tok.c_str());
 }
 
-void tokenizeAndFillup(stringstream &aStrStream, PatientRecord &patient) {
+void tokenizeAndFillup(stringstream& aStrStream, PatientRecord& patient) {
   string token;
   int tokenNumber = 1;
   while (aStrStream >> token) {
@@ -72,25 +66,26 @@ void tokenizeAndFillup(stringstream &aStrStream, PatientRecord &patient) {
 }
 
 void printPatients(PatientRecord recordArray[], int patientAmt) {
-  for(int i =0;i<patientAmt;i++) {
+  cout << "Patients " << patientAmt << endl;
+  for (int i = 0;i < patientAmt;i++) {
     cout << recordArray[i].firstName << " " << recordArray[i].surName << " ";
 
     if (recordArray[i].bloodType == A) cout << "A ";
-    else if(recordArray[i].bloodType == AB) cout << "AB ";
-    else if(recordArray[i].bloodType == O) cout << "O ";
-    else if(recordArray[i].bloodType == B) cout << "B ";
-    
+    else if (recordArray[i].bloodType == AB) cout << "AB ";
+    else if (recordArray[i].bloodType == O) cout << "O ";
+    else if (recordArray[i].bloodType == B) cout << "B ";
+
     if (recordArray[i].organType == Heart) cout << "heart ";
-    else if(recordArray[i].organType == Kidney) cout << "kidney ";
-    else if(recordArray[i].organType == Liver) cout << "liver ";
-    else if(recordArray[i].organType == Lung) cout << "lung ";
+    else if (recordArray[i].organType == Kidney) cout << "kidney ";
+    else if (recordArray[i].organType == Liver) cout << "liver ";
+    else if (recordArray[i].organType == Lung) cout << "lung ";
 
     cout << recordArray[i].age << " " << recordArray[i].yearAdded << endl;
   }
 
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   int patientAmount = 0;
   int option;
   PatientRecord recordArray[100];
@@ -98,13 +93,13 @@ int main(int argc, char *argv[]) {
   stringstream ss;
   while (true) {
     cout << "=======================\n[Organ Transplant List]\nThere are "
-            "currently "
-         << patientAmount << " patient(s) in the list\n"
-         << endl;
+      "currently "
+      << patientAmount << " patient(s) in the list\n"
+      << endl;
     cout << "Please choose an option:\n1. Add Patient\n2. Show List of "
-            "Patients\n"
-            "3. Save List of Patients\n4. Quit"
-         << endl;
+      "Patients\n"
+      "3. Save List of Patients\n4. Quit"
+      << endl;
     cin >> option;
     cout << "=============" << endl;
     if (option == 1) {
@@ -116,13 +111,16 @@ int main(int argc, char *argv[]) {
       ss.str(inputLine);
       tokenizeAndFillup(ss, recordArray[patientAmount]);
       patientAmount++;
-    } else if (option == 2) {
+    }
+    else if (option == 2) {
       cout << "[Show List of Patients]" << endl;
-      cout << "Patients "<< patientAmount << endl;
       printPatients(recordArray, patientAmount);
-    } else if (option == 3) {
+    }
+    else if (option == 3) {
       cout << "[Save List of Patients]" << endl;
-    } else if (option == 4) {
+      writeFile(recordArray, patientAmount);
+    }
+    else if (option == 4) {
       cout << "Quitting..";
       return 0;
     }
