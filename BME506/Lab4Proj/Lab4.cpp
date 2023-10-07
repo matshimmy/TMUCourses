@@ -71,6 +71,25 @@ void tokenizeAndFillup(stringstream &aStrStream, PatientRecord &patient) {
   }
 }
 
+void printPatients(PatientRecord recordArray[], int patientAmt) {
+  for(int i =0;i<patientAmt;i++) {
+    cout << recordArray[i].firstName << " " << recordArray[i].surName << " ";
+
+    if (recordArray[i].bloodType == A) cout << "A ";
+    else if(recordArray[i].bloodType == AB) cout << "AB ";
+    else if(recordArray[i].bloodType == O) cout << "O ";
+    else if(recordArray[i].bloodType == B) cout << "B ";
+    
+    if (recordArray[i].organType == Heart) cout << "heart ";
+    else if(recordArray[i].organType == Kidney) cout << "kidney ";
+    else if(recordArray[i].organType == Liver) cout << "liver ";
+    else if(recordArray[i].organType == Lung) cout << "lung ";
+
+    cout << recordArray[i].age << " " << recordArray[i].yearAdded << endl;
+  }
+
+}
+
 int main(int argc, char *argv[]) {
   int patientAmount = 0;
   int option;
@@ -99,6 +118,8 @@ int main(int argc, char *argv[]) {
       patientAmount++;
     } else if (option == 2) {
       cout << "[Show List of Patients]" << endl;
+      cout << "Patients "<< patientAmount << endl;
+      printPatients(recordArray, patientAmount);
     } else if (option == 3) {
       cout << "[Save List of Patients]" << endl;
     } else if (option == 4) {
