@@ -10,10 +10,10 @@ void processToken(int tokNum, string& tok, PatientRecord& patient) {
 		else if (0 == tok.compare("B")) patient.bloodType = B;
 	}
 	if (4 == tokNum) {
-		if (0 == tok.compare("heart")) patient.organType = Heart;
-		else if (0 == tok.compare("kidney")) patient.organType = Kidney;
-		else if (0 == tok.compare("liver")) patient.organType = Liver;
-		else if (0 == tok.compare("lung")) patient.organType = Lung;
+		if (0 == tok.compare("heart") || 0 == tok.compare("Heart")) patient.organType = Heart;
+		else if (0 == tok.compare("kidney") || 0 == tok.compare("Kidney")) patient.organType = Kidney;
+		else if (0 == tok.compare("liver") || 0 == tok.compare("Liver")) patient.organType = Liver;
+		else if (0 == tok.compare("lung") || 0 == tok.compare("Lung")) patient.organType = Lung;
 	}
 	if (5 == tokNum) patient.age = atoi(tok.c_str());
 	if (6 == tokNum) patient.yearAdded = atoi(tok.c_str());
