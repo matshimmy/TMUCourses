@@ -4,49 +4,6 @@
 #include <iostream>
 #include <string>
 
-void writeIntoFileStream(PatientRecord recordArray[], ofstream& outputFileStream, int patientAmount) {
-	outputFileStream << "Patients " << patientAmount << endl;
-	for (int i = 0; i < patientAmount; ++i) {
-		outputFileStream << recordArray[i].firstName << " " << recordArray[i].surName << " ";
-
-		if (A == recordArray[i].bloodType) outputFileStream << "A ";
-		else if (AB == recordArray[i].bloodType) outputFileStream << "AB ";
-		else if (O == recordArray[i].bloodType) outputFileStream << "O ";
-		else if (B == recordArray[i].bloodType) outputFileStream << "B ";
-
-		if (Heart == recordArray[i].organType) outputFileStream << "heart ";
-		else if (Kidney == recordArray[i].organType) outputFileStream << "kidney ";
-		else if (Liver == recordArray[i].organType) outputFileStream << "liver ";
-		else if (Lung == recordArray[i].organType) outputFileStream << "lung ";
-
-		outputFileStream << recordArray[i].age << " ";
-		outputFileStream << recordArray[i].yearAdded << endl;
-	}
-}
-
-void writeFile(PatientRecord recordArray[], int patientAmount) {
-	ofstream outputFileStream;
-	outputFileStream.open("transplantPatients.txt");
-	if (outputFileStream.is_open()) {
-		writeIntoFileStream(recordArray, outputFileStream, patientAmount);
-		outputFileStream.close();
-	}
-	else
-		cout << "Unable to open file" << endl;
-}
-
-void readFromFileStream(PatientRecord recordArray[], ifstream& outputFileStream) {
-}
-
-void readFile(PatientRecord recordArray[]) {
-	ifstream inputFileStream;
-	inputFileStream.open("transplantPatients.txt");
-	if (inputFileStream.is_open()) {
-		readFromFileStream(recordArray, inputFileStream);
-		inputFileStream.close();
-	}
-}
-
 void processToken(int tokNum, string& tok, PatientRecord& patient) {
 	if (1 == tokNum) patient.firstName = tok;
 	if (2 == tokNum) patient.surName = tok;
@@ -75,6 +32,69 @@ void tokenizeAndFillup(stringstream& aStrStream, PatientRecord& patient) {
 	}
 }
 
+void writeIntoFileStream(PatientRecord recordArray[], ofstream& outputFileStream, int patientAmount) {
+	outputFileStream << "Patients " << patientAmount << endl;
+	for (int i = 0; i < patientAmount; ++i) {
+		outputFileStream << recordArray[i].firstName << " " << recordArray[i].surName << " ";
+
+		if (A == recordArray[i].bloodType) outputFileStream << "A ";
+		else if (AB == recordArray[i].bloodType) outputFileStream << "AB ";
+		else if (O == recordArray[i].bloodType) outputFileStream << "O ";
+		else if (B == recordArray[i].bloodType) outputFileStream << "B ";
+
+		if (Heart == recordArray[i].organType) outputFileStream << "heart ";
+		else if (Kidney == recordArray[i].organType) outputFileStream << "kidney ";
+		else if (Liver == recordArray[i].organType) outputFileStream << "liver ";
+		else if (Lung == recordArray[i].organType) outputFileStream << "lung ";
+
+		outputFileStream << recordArray[i].age << " ";
+		outputFileStream << recordArray[i].yearAdded << endl;
+	}
+}
+
+void writeFile(PatientRecord recordArray[], int patientAmount) {
+	ofstream outputFileStream;
+	outputFileStream.open("transplantPatients.txt");
+	if (outputFileStream.is_open()) {
+		writeIntoFileStream(recordArray, outputFileStream, patientAmount);
+		outputFileStream.close();
+	}
+	else cout << "Unable to open file" << endl;
+}
+
+int readFromFileStream(PatientRecord recordArray[], ifstream& inputFileStream) {
+	stringstream ss;
+	string txtLine;
+	int patients;
+	getline(inputFileStream, txtLine);//patient #
+	ss.str(txtLine);
+	ss >> txtLine;//patient
+	ss >> txtLine;// #
+	patients = stoi(txtLine);
+	ss.str("");
+	ss.clear();
+	for (int i = 0; i < patients; i++) {
+		getline(inputFileStream, txtLine);
+		ss.str(txtLine);
+		tokenizeAndFillup(ss, recordArray[i]);
+		ss.str("");
+		ss.clear();
+	}
+	return patients;
+}
+
+int readFile(PatientRecord recordArray[]) {
+	ifstream inputFileStream;
+	inputFileStream.open("transplantPatients.txt");
+	int patients = 0;
+	if (inputFileStream.is_open()) {
+		patients = readFromFileStream(recordArray, inputFileStream);
+		inputFileStream.close();
+	}
+	else cout << "Unable to open file" << endl;
+	return patients;
+}
+
 void printPatients(PatientRecord recordArray[], int patientAmt) {
 	cout << "Patients " << patientAmt << endl;
 	for (int i = 0; i < patientAmt; i++) {
@@ -95,11 +115,11 @@ void printPatients(PatientRecord recordArray[], int patientAmt) {
 }
 
 int main(int argc, char* argv[]) {
-	int patientAmount = 0;
 	int option;
 	PatientRecord recordArray[100];
 	string inputLine;
 	stringstream ss;
+	int patientAmount = readFile(recordArray);
 	while (true) {
 		cout << "=======================\n[Organ Transplant List]\nThere are currently " << patientAmount << " patient(s) in the list\n" << endl;
 		cout << "Please choose an option:\n1. Add Patient\n2. Show List of Patients\n3. Save List of Patients\n4. Quit" << endl;
