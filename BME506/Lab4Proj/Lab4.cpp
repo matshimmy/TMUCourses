@@ -1,8 +1,4 @@
 #include "Lab4.h"
-#include <climits>
-#include <cstring>
-#include <iostream>
-#include <string>
 
 void processToken(int tokNum, string& tok, PatientRecord& patient) {
 	if (1 == tokNum) patient.firstName = tok;
@@ -96,21 +92,25 @@ int readFile(PatientRecord recordArray[]) {
 }
 
 void printPatients(PatientRecord recordArray[], int patientAmt) {
-	cout << "Patients " << patientAmt << endl;
+	cout << "ID\tName\t\tBlood\tOrgan\tAge\tYear Added" << endl;
+	cout << "-----------------------------------------------------------" << endl;
+
 	for (int i = 0; i < patientAmt; i++) {
-		cout << recordArray[i].firstName << " " << recordArray[i].surName << " ";
+		cout << i+1 << "\t" << recordArray[i].surName << ", " << recordArray[i].firstName[0] << "\t";
 
 		if (recordArray[i].bloodType == A) cout << "A ";
 		else if (recordArray[i].bloodType == AB) cout << "AB ";
 		else if (recordArray[i].bloodType == O) cout << "O ";
 		else if (recordArray[i].bloodType == B) cout << "B ";
 
+		cout << "\t";
+
 		if (recordArray[i].organType == Heart) cout << "heart ";
 		else if (recordArray[i].organType == Kidney) cout << "kidney ";
 		else if (recordArray[i].organType == Liver) cout << "liver ";
 		else if (recordArray[i].organType == Lung) cout << "lung ";
 
-		cout << recordArray[i].age << " " << recordArray[i].yearAdded << endl;
+		cout << "\t" << recordArray[i].age << "\t" << recordArray[i].yearAdded << endl;
 	}
 }
 
@@ -134,13 +134,14 @@ int main(int argc, char* argv[]) {
 			ss.str(inputLine);
 			tokenizeAndFillup(ss, recordArray[patientAmount]);
 			patientAmount++;
+			cout << ".. [Adding]" << endl;
 		}
 		else if (option == 2) {
 			cout << "[Show List of Patients]" << endl;
 			printPatients(recordArray, patientAmount);
 		}
 		else if (option == 3) {
-			cout << "[Save List of Patients]" << endl;
+			cout << "[Save List of Patients] (File: transplantPatients.txt)" << endl;
 			writeFile(recordArray, patientAmount);
 		}
 		else if (option == 4) {
