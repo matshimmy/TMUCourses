@@ -64,14 +64,13 @@ aminoAcidDic = {'GGG': 'G', 'GGA': 'G', 'GGC': 'G', 'GGT': 'G',
                 'ATG': 'M', 'ATA': 'I', 'ATC': 'I', 'ATT': 'I',
                 'CTG': 'L', 'CTA': 'L', 'CTC': 'L', 'CTT': 'L',
                 'TTG': 'L', 'TTA': 'L', 'TTC': 'F', 'TTT': 'F',
-                # DNA
                 }
 
 # output missence (M), silent (S) or nonsense (N)
-# will add to count to determine the number of differences
-
-
 def compareCodons(codon1, codon2):
+    # check N -- check if it is a stop codon TAA TAG TGA
+    if (aminoAcidDic[codon2] == 'X' or aminoAcidDic[codon1] == 'X'):
+        return "N"
     # check M -- new amino acid is made
     if (aminoAcidDic[codon1] != aminoAcidDic[codon2]):
         return "M"
@@ -79,15 +78,9 @@ def compareCodons(codon1, codon2):
     if (aminoAcidDic[codon1] == aminoAcidDic[codon2]):
         return "S"
 
-    # check N -- check if it is a stop codon TAA TAG TGA
-    if (aminoAcidDic[codon2] == "TAA" or aminoAcidDic[codon2] == "TAG" or
-            aminoAcidDic[codon2] == "TGA"):
-        return "N"
-# function end
-
 
 def findCodon(seq, position):
-    modVal = position % 3
+    modVal = (position-1) % 3
     if modVal == 0:
         return seq[position-1:position+2]
     elif modVal == 1:
@@ -97,23 +90,32 @@ def findCodon(seq, position):
 
 def differences(seq1, seq2):
     minLen = min(len(seq1), len(seq2))
+    count = 0
+    diffArray = []
     for x in range(minLen):
         if seq1[x] != seq2[x]:
-            c1 = findCodon(seq1, x)
-            c2 = findCodon(seq2, x)
-            print(c1+c2)
-            print(seq1[x]+str(x)+seq2[x]+"_"+compareCodons(c1, c2))
+            count += 1
+            if count < 5:
+                c1 = findCodon(seq1, x)
+                c2 = findCodon(seq2, x)
+                diffArray.append(seq1[x]+str(x)+seq2[x]+"_"+compareCodons(c1, c2))
+    return diffArray, count
 
 
-differences(dic["ORF6 protein"][0], dic["ORF6 protein"][1])
-# differences(dic["ORF3a protein"][0], dic["ORF3a protein"][1])
 # display the table--------------------------------------
 # printing out the table headers
 sorted_dict = dict(sorted(dic.items()))
-print("{:<30} {:<15} {:<10} {:<20} {:<10}"
+print("{:<30} {:<15} {:<10} {:<45} {:<10}"
       .format('Gene', 'NC Length', 'OR Length ', 'Difference', 'Dif Count'))
 # printing out the information for the table
-for k, v in sorted_dict.items():
-    NCseq, ORseq = v
-    # differences(NCseq, ORseq)
-    print("{:<30} {:<15} {:<10} {:<10}".format(k, len(NCseq), len(ORseq), 1))
+for key, seqArray in sorted_dict.items():
+    NCseq, ORseq = seqArray
+    diffArray, count = differences(NCseq, ORseq)
+    diffStr = "["
+    for diff in diffArray:
+        diffStr = diffStr + "'" + diff + "' "
+    if len(diffStr) == 1:
+        diffStr = "[]"
+    else:
+        diffStr = diffStr[:-1]+ ']'
+    print("{:<30} {:<15} {:<10} {:<45} {:<10}".format(key, len(NCseq), len(ORseq), diffStr, count))
