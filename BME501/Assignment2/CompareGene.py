@@ -16,80 +16,104 @@ length = len(data)
 
 # find the gene information from the file
 while (length > 1):
-	# determine the gene name
-	ncIndex = data.find("NC")
-	orIndex = data.find("OR")
+    # determine the gene name
+    ncIndex = data.find("NC")
+    orIndex = data.find("OR")
 
-	index = 0 if (ncIndex < orIndex and ncIndex != -1) else 1
-	GeneStrStartIndex = data.find("|") + 1
-	GeneStrEndIndex = (data[GeneStrStartIndex:].find(" ["))+GeneStrStartIndex
-	GeneStr = data[GeneStrStartIndex:GeneStrEndIndex]
-	data = data[GeneStrEndIndex:]
+    index = 0 if (ncIndex < orIndex and ncIndex != -1) else 1
+    GeneStrStartIndex = data.find("|") + 1
+    GeneStrEndIndex = (data[GeneStrStartIndex:].find(" ["))+GeneStrStartIndex
+    GeneStr = data[GeneStrStartIndex:GeneStrEndIndex]
+    data = data[GeneStrEndIndex:]
 
-	# determine the gene sequence
-	seqStart = data.find("]") + 1
-	seqEnd = data.find(">")
-	if seqEnd == -1:
-		seqEnd = len(data)
-	seq = data[seqStart:seqEnd]
-	
-	# add the information into the dictionary
-	if GeneStr in dic.keys():
-		dic[GeneStr][index] = seq
-	else:
-		if index == 0:
-			dic[GeneStr] = [seq,""]
-		else:
-			dic[GeneStr] = ["",seq]
+    # determine the gene sequence
+    seqStart = data.find("]") + 1
+    seqEnd = data.find(">")
+    if seqEnd == -1:
+        seqEnd = len(data)
+    seq = data[seqStart:seqEnd]
 
-	data = data[seqEnd:]
-	length = len(data)
+    # add the information into the dictionary
+    if GeneStr in dic.keys():
+        dic[GeneStr][index] = seq
+    else:
+        if index == 0:
+            dic[GeneStr] = [seq, ""]
+        else:
+            dic[GeneStr] = ["", seq]
+
+    data = data[seqEnd:]
+    length = len(data)
 
 aminoAcidDic = {'GGG': 'G', 'GGA': 'G', 'GGC': 'G', 'GGT': 'G',
-				'AGG': 'R', 'AGA': 'R', 'AGC': 'S', 'AGT': 'S',
-				'CGG': 'R', 'CGA': 'R', 'CGC': 'R', 'CGT': 'R',
-				'TGG': 'W', 'TGA': 'X', 'TGC': 'C', 'TGT': 'C',
+                'AGG': 'R', 'AGA': 'R', 'AGC': 'S', 'AGT': 'S',
+                'CGG': 'R', 'CGA': 'R', 'CGC': 'R', 'CGT': 'R',
+                'TGG': 'W', 'TGA': 'X', 'TGC': 'C', 'TGT': 'C',
 
-				'GAG': 'E', 'GAA': 'E', 'GAC': 'D', 'GAT': 'D',
-				'AAG': 'K', 'AAA': 'K', 'AAC': 'N', 'AAT': 'N',
-				'CAG': 'Q', 'CAA': 'Q', 'CAC': 'H', 'CAT': 'H',
-				'TAG': 'X', 'TAA': 'X', 'TAC': 'Y', 'TAT': 'Y',
+                'GAG': 'E', 'GAA': 'E', 'GAC': 'D', 'GAT': 'D',
+                'AAG': 'K', 'AAA': 'K', 'AAC': 'N', 'AAT': 'N',
+                'CAG': 'Q', 'CAA': 'Q', 'CAC': 'H', 'CAT': 'H',
+                'TAG': 'X', 'TAA': 'X', 'TAC': 'Y', 'TAT': 'Y',
 
-				'GCG': 'A', 'GCA': 'A', 'GCC': 'A', 'GCT': 'A',
-				'ACG': 'T', 'ACA': 'T', 'ACC': 'T', 'ACT': 'T',
-				'CCG': 'P', 'CCA': 'P', 'CCC': 'P', 'CCT': 'P',
-				'TCG': 'S', 'TCA': 'S', 'TCC': 'S', 'TCT': 'S',
+                'GCG': 'A', 'GCA': 'A', 'GCC': 'A', 'GCT': 'A',
+                'ACG': 'T', 'ACA': 'T', 'ACC': 'T', 'ACT': 'T',
+                'CCG': 'P', 'CCA': 'P', 'CCC': 'P', 'CCT': 'P',
+                'TCG': 'S', 'TCA': 'S', 'TCC': 'S', 'TCT': 'S',
 
-				'GTG': 'V', 'GTA': 'V', 'GTC': 'V', 'GTT': 'V',
-				'ATG': 'M', 'ATA': 'I', 'ATC': 'I', 'ATT': 'I',
-				'CTG': 'L', 'CTA': 'L', 'CTC': 'L', 'CTT': 'L',
-				'TTG': 'L', 'TTA': 'L', 'TTC': 'F', 'TTT': 'F',
-				# DNA
-				}
+                'GTG': 'V', 'GTA': 'V', 'GTC': 'V', 'GTT': 'V',
+                'ATG': 'M', 'ATA': 'I', 'ATC': 'I', 'ATT': 'I',
+                'CTG': 'L', 'CTA': 'L', 'CTC': 'L', 'CTT': 'L',
+                'TTG': 'L', 'TTA': 'L', 'TTC': 'F', 'TTT': 'F',
+                # DNA
+                }
 
 # output missence (M), silent (S) or nonsense (N)
 # will add to count to determine the number of differences
-def compareCodons(codon1, codon2):
-	# check M -- new amino acid is made
-	if (aminoAcidDic[codon1] != aminoAcidDic[codon2]):
-		return "M"
-	# check S -- same amino acid, different code
-	if (aminoAcidDic[codon1] == aminoAcidDic[codon2]):
-		return "S"
 
-	# check N -- check if it is a stop codon TAA TAG TGA
-	if (aminoAcidDic[codon2] == "TAA" or aminoAcidDic[codon2] == "TAG" or
-			aminoAcidDic[codon2] == "TGA"):
-		return "N"
+
+def compareCodons(codon1, codon2):
+    # check M -- new amino acid is made
+    if (aminoAcidDic[codon1] != aminoAcidDic[codon2]):
+        return "M"
+    # check S -- same amino acid, different code
+    if (aminoAcidDic[codon1] == aminoAcidDic[codon2]):
+        return "S"
+
+    # check N -- check if it is a stop codon TAA TAG TGA
+    if (aminoAcidDic[codon2] == "TAA" or aminoAcidDic[codon2] == "TAG" or
+            aminoAcidDic[codon2] == "TGA"):
+        return "N"
 # function end
 
 
+def findCodon(seq, position):
+    modVal = position % 3
+    if modVal == 0:
+        return seq[position-1:position+2]
+    elif modVal == 1:
+        return seq[position-2:position+1]
+    return seq[position:position+3]
+
+
+def differences(seq1, seq2):
+    minLen = min(len(seq1), len(seq2))
+    for x in range(minLen):
+        if seq1[x] != seq2[x]:
+            c1 = findCodon(seq1, x)
+            c2 = findCodon(seq2, x)
+            print(c1+c2)
+            print(seq1[x]+str(x)+seq2[x]+"_"+compareCodons(c1, c2))
+
+
+differences(dic["ORF6 protein"][0], dic["ORF6 protein"][1])
+# differences(dic["ORF3a protein"][0], dic["ORF3a protein"][1])
 # display the table--------------------------------------
 # printing out the table headers
 sorted_dict = dict(sorted(dic.items()))
 print("{:<30} {:<15} {:<10} {:<20} {:<10}"
-	  .format('Gene', 'NC Length', 'OR Length ', 'Difference', 'Dif Count'))
+      .format('Gene', 'NC Length', 'OR Length ', 'Difference', 'Dif Count'))
 # printing out the information for the table
 for k, v in sorted_dict.items():
-	NCseq, ORseq = v
-	print("{:<30} {:<15} {:<10} {:<10}".format(k, len(NCseq), len(ORseq), 1))
+    NCseq, ORseq = v
+    # differences(NCseq, ORseq)
+    print("{:<30} {:<15} {:<10} {:<10}".format(k, len(NCseq), len(ORseq), 1))
