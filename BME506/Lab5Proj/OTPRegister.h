@@ -16,7 +16,9 @@ public:
 
 	void registerPatient(string name, int healthCardNumber);
 	bool examine();
+	void displayRegister();
+
+	void printPatient(Patient* patient);
 	int patientAmount();
-	void displayRegister(); //a helping function
 };
 #endif

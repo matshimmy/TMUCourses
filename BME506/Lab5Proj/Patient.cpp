@@ -2,7 +2,7 @@
 
 // Default constructor
 Patient::Patient() {
-    cout << "Patient() ctor ..." << endl;
+    // cout << "Patient() ctor ..." << endl;
 	this->name = "";
 	this->healthCardNumber = 0;
 	this->condition = UNKNOWN;
@@ -11,7 +11,7 @@ Patient::Patient() {
 
 // Parameterized constructor
 Patient::Patient(string name, int healthCardNumber) {
-    cout << "Patient(string name, int healthCardNumber) ctor ..." << endl;
+    // cout << "Patient(string name, int healthCardNumber) ctor ..." << endl;
 	this->name = name;
 	this->healthCardNumber = healthCardNumber;
 	this->condition = UNKNOWN;
@@ -20,7 +20,7 @@ Patient::Patient(string name, int healthCardNumber) {
 
 // Destructor
 Patient::~Patient() {
-    cout << "~Patient() dtor ..." << endl;
+    // cout << "~Patient() dtor ..." << endl;
 }
 
 // Getters

@@ -27,6 +27,7 @@ int main() {
 		}
 		else if (option == 2) {
 			cout << "[Examine Patient]" << endl;
+			OTPRegister.examine();
 		}
 		else if (option == 3) {
 			cout << "[Display Patients]" << endl;
