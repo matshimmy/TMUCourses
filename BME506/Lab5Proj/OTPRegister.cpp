@@ -14,8 +14,9 @@ OTPRegister::~OTPRegister() {
     }
 }
 
-void OTPRegister::registerPatient(Patient* patient) {
-    queue.push_back(patient);
+void OTPRegister::registerPatient(string name, int healthCardNumber) {
+    Patient* newPatient = new Patient(name, healthCardNumber); 
+    queue.push_back(newPatient);
 }
 
 bool OTPRegister::examine() {
@@ -23,6 +24,10 @@ bool OTPRegister::examine() {
 
     queue.pop_front();
     return true;
+}
+
+int OTPRegister::patientAmount() {
+    return queue.size();
 }
 
 void OTPRegister::displayRegister() {

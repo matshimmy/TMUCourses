@@ -12,9 +12,10 @@ private:
 public:
 	OTPRegister();
 	~OTPRegister();
-	
-	void registerPatient(Patient* patient);
-    bool examine();
-    void displayRegister(); //a helping function
+
+	void registerPatient(string name, int healthCardNumber);
+	bool examine();
+	int patientAmount();
+	void displayRegister(); //a helping function
 };
 #endif
