@@ -2,6 +2,7 @@
 #define OTPREGISTER_H_
 
 #include <iostream>
+#include <iomanip>
 #include <deque>
 #include "Patient.h"
 using namespace std;

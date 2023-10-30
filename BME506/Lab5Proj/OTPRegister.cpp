@@ -15,7 +15,7 @@ OTPRegister::~OTPRegister() {
 }
 
 void OTPRegister::registerPatient(string name, int healthCardNumber) {
-    Patient* newPatient = new Patient(name, healthCardNumber); 
+    Patient* newPatient = new Patient(name, healthCardNumber);
     queue.push_back(newPatient);
 }
 
@@ -31,10 +31,16 @@ int OTPRegister::patientAmount() {
 }
 
 void OTPRegister::displayRegister() {
-    cout << "queue has: ";
-    // int qSize = queue.size();
-    // for (int i = 0; i < qSize; ++i) {
-    //     cout << i << " ";
-    // }
-    // cout << endl;
+    int qSize = queue.size();
+    for (int i = 0; i < qSize; ++i) {
+        cout << left << setw(10) << queue[i]->getName()
+            << setw(10) << queue[i]->getHealthCardNumber()
+            << setw(5) << queue[i]->getCervixDilation()
+            << setw(10);
+        if (queue[i]->getCondition() == UNKNOWN) cout << "UNKNOWN";
+        else if (queue[i]->getCondition() == LABOUR) cout << "LABOUR";
+        else if (queue[i]->getCondition() == ADMIT) cout << "ADMIT";
+        cout << endl;
+    }
+    cout << endl;
 }
