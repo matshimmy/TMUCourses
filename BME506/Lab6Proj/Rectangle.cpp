@@ -10,6 +10,6 @@ Rectangle::~Rectangle() {
     // cout << "~Rectangle() dtor ..." << endl;
 }
 
-void Rectangle::print() const {
+void Rectangle::print() {
 	cout << "Rectangle of color: " << getColor() << ", Area: " << (length * breadth) << endl;
 }

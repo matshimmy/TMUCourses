@@ -12,8 +12,8 @@ private:
 public:
 	Shape(string color);
 	virtual ~Shape();
-	string getColor() const;
-	virtual void print() const = 0;
+	string getColor();
+	virtual void print();
 };
 
 #endif // SHAPE_H_

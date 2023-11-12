@@ -15,7 +15,7 @@ public:
 	~ListOfShapes();
 	void addShape(Shape* shape);
 	void removeShape();
-	void displayShapes() const;
+	void displayShapes();
 	int shapeAmount();
 };
 

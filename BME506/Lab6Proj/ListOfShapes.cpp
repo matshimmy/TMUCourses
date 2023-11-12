@@ -24,8 +24,8 @@ void ListOfShapes::removeShape() {
 	}
 }
 
-void ListOfShapes::displayShapes() const {
-	for (const Shape* shape : shapes) {
+void ListOfShapes::displayShapes() {
+	for (Shape* shape : shapes) {
 		shape->print();
 	}
 }

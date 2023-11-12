@@ -12,7 +12,7 @@ private:
 public:
 	Rectangle(string color, double length, double breadth);
 	virtual ~Rectangle();
-	void print() const override;
+	virtual void print();
 };
 
 #endif // RECTANGLE_H_

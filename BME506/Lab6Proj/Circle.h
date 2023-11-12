@@ -11,7 +11,7 @@ private:
 public:
 	Circle(string color, double radius);
 	virtual ~Circle();
-	void print() const override;
+	virtual void print();
 };
 
 #endif // CIRCLE_H_

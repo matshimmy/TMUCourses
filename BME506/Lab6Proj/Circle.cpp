@@ -9,7 +9,7 @@ Circle::~Circle() {
     // cout << "~Circle() dtor ..." << endl;
 }
 
-void Circle::print() const {
+void Circle::print() {
 	double area = 3.14 * radius * radius;
 	cout << "Circle of color: " << getColor() << ", Area: " << area << endl;
 }
