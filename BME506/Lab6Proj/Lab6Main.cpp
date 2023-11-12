@@ -6,10 +6,10 @@
 
 using namespace std;
 
-void displayMenu() {
+void displayMenu(int shapeAmount) {
 	cout << "=======================" << endl;
 	cout << "[Shape List]" << endl;
-	// You would typically pass the current number of shapes in the list here
+	cout << "There are currently " << shapeAmount << " shapes(s) in the list" << endl;
 	cout << "Please choose an option:" << endl;
 	cout << "1. Add Rectangle" << endl;
 	cout << "2. Add Circle" << endl;
@@ -55,7 +55,7 @@ int main() {
 	int choice;
 
 	do {
-		displayMenu();
+		displayMenu(listOfShapes.shapeAmount());
 		cin >> choice;
 
 		switch (choice) {

@@ -29,3 +29,7 @@ void ListOfShapes::displayShapes() const {
 		shape->print();
 	}
 }
+
+int ListOfShapes::shapeAmount() {
+	return shapes.size();
+}

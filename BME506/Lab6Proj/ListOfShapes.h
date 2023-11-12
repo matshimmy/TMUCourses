@@ -16,6 +16,7 @@ public:
 	void addShape(Shape* shape);
 	void removeShape();
 	void displayShapes() const;
+	int shapeAmount();
 };
 
 #endif // LISTOFSHAPES_H_
