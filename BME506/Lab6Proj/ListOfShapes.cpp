@@ -1,7 +1,12 @@
 #include "ListOfShapes.h"
-#include <iostream>
+
+ListOfShapes::ListOfShapes() {
+    // cout << "ListOfShapes() ctor ..." << endl;
+	this->shapes = vector<Shape*>();
+}
 
 ListOfShapes::~ListOfShapes() {
+    // cout << "~ListOfShapes() dtor ..." << endl;
 	for (Shape* shape : shapes) {
 		delete shape;
 	}

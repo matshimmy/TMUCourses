@@ -1,10 +1,13 @@
 #include "Shape.h"
 
 Shape::Shape(string color) {
+    // cout << "Shape(string color) ctor ..." << endl;
 	this->color = color;
 }
 
-Shape::~Shape() {}
+Shape::~Shape() {
+    // cout << "~Shape() dtor ..." << endl;
+}
 
 string Shape::getColor() const {
 	return color;

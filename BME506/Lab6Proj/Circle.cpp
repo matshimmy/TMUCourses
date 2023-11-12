@@ -1,11 +1,13 @@
 #include "Circle.h"
-#include <iostream>
 
 Circle::Circle(string color, double radius) : Shape(color) {
+    // cout << "Circle(string color, double radius) ctor ..." << endl;
 	this->radius = radius;
 }
 
-Circle::~Circle() {}
+Circle::~Circle() {
+    // cout << "~Circle() dtor ..." << endl;
+}
 
 void Circle::print() const {
 	double area = 3.14 * radius * radius;

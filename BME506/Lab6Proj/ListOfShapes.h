@@ -2,6 +2,7 @@
 #define LISTOFSHAPES_H_
 
 #include "Shape.h"
+#include <iostream>
 #include <vector>
 using namespace std;
 
@@ -10,6 +11,7 @@ private:
 	vector<Shape*> shapes;
 
 public:
+	ListOfShapes();
 	~ListOfShapes();
 	void addShape(Shape* shape);
 	void removeShape();
