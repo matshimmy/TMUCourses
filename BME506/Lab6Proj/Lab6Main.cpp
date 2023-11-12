@@ -9,7 +9,7 @@ using namespace std;
 void displayMenu(int shapeAmount) {
 	cout << "=======================" << endl;
 	cout << "[Shape List]" << endl;
-	cout << "There are currently " << shapeAmount << " shapes(s) in the list" << endl;
+	cout << "There are currently " << shapeAmount << " shapes(s) in the list\n" << endl;
 	cout << "Please choose an option:" << endl;
 	cout << "1. Add Rectangle" << endl;
 	cout << "2. Add Circle" << endl;

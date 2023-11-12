@@ -7,8 +7,8 @@ ListOfShapes::ListOfShapes() {
 
 ListOfShapes::~ListOfShapes() {
 	// cout << "~ListOfShapes() dtor ..." << endl;
-	for (Shape* shape : shapes) {
-		delete shape;
+	for (int i = 0;i < shapes.size();i++) {
+		removeShape();
 	}
 }
 
@@ -19,8 +19,9 @@ void ListOfShapes::addShape(Shape* shape) {
 void ListOfShapes::removeShape() {
 	if (!shapes.empty()) {
 		Shape* lastShape = shapes.back();
-		delete lastShape;  // Delete the object pointed to by the last element
 		shapes.pop_back(); // Remove the last element (pointer) from the vector
+		delete lastShape;  // Delete the object pointed to by the last element
+		lastShape = 0;
 	}
 }
 

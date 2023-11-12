@@ -13,7 +13,7 @@ public:
 	Shape(string color);
 	virtual ~Shape();
 	string getColor();
-	virtual void print();
+	virtual void print() = 0;
 };
 
 #endif // SHAPE_H_

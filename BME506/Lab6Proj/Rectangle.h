@@ -3,6 +3,7 @@
 
 #include "Shape.h"
 #include <iostream>
+#include <iomanip>
 
 class Rectangle : public Shape {
 private:

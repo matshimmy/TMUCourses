@@ -12,7 +12,3 @@ Shape::~Shape() {
 string Shape::getColor() {
 	return color;
 }
-
-void Shape::print() {
-	cout << "Shape of color: " << this->color << endl;
-}
