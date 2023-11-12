@@ -1,12 +1,12 @@
 #include "ListOfShapes.h"
 
 ListOfShapes::ListOfShapes() {
-    // cout << "ListOfShapes() ctor ..." << endl;
+	// cout << "ListOfShapes() ctor ..." << endl;
 	this->shapes = vector<Shape*>();
 }
 
 ListOfShapes::~ListOfShapes() {
-    // cout << "~ListOfShapes() dtor ..." << endl;
+	// cout << "~ListOfShapes() dtor ..." << endl;
 	for (Shape* shape : shapes) {
 		delete shape;
 	}
@@ -25,8 +25,8 @@ void ListOfShapes::removeShape() {
 }
 
 void ListOfShapes::displayShapes() {
-	for (Shape* shape : shapes) {
-		shape->print();
+	for (int i = 0;i < shapes.size();i++) {
+		shapes.at(i)->print();
 	}
 }
 
