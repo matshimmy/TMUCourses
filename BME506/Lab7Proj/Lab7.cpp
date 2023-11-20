@@ -35,22 +35,11 @@ void Factory::destroyInstance() {
 }
 
 Product* Factory::createProduct(int id) {
-    Product* newProduct = new Product(id);
-    products.push_back(newProduct);
+	Product* newProduct = new Product(id);
 	return newProduct;
 }
 
-void Factory::deleteProducts() {
-	int pSize = products.size();
-	for (int i = 0; i < pSize; ++i)
-	{
-		delete products[i];
-		products[i] = 0;
-	}
-}
-
 Factory::~Factory() {
-	deleteProducts();
 	// cout << "~Factory() dtor ..." << endl;
 }
 
@@ -61,7 +50,10 @@ int main(int argc, char* argv[]) {
 	Product* p2 = f->createProduct(6);
 	cout << p1->getID() << endl;
 	cout << p2->getID() << endl;
-	
+	delete p1;
+	p1 = 0;
+	delete p2;
+	p2 = 0;
 	Factory::destroyInstance();
 	return 0;
 } //end of main

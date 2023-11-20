@@ -1,7 +1,6 @@
 #ifndef LAB7_H
 #define LAB7_H
 
-#include <deque>
 #include <iostream>
 using namespace std;
 
@@ -19,11 +18,9 @@ public:
 class Factory {
 private:
 	static Factory* instance;
-	deque<Product*> products;
-	void deleteProducts();
 	Factory();
-public:
 	~Factory();
+public:
 	static Factory* getInstance();
 	static void destroyInstance();
 	Product* createProduct(int id);
