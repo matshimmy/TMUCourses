@@ -1,39 +1,53 @@
 import math
 
-f1 = open('curedGapless.txt')
-f2 = open('m2-9.txt')
-# ----------------------------------------------------
-# READING AND REMOVING NEWLINES
-# ----------------------------------------------------
-print(f1.readline())
-print(f2.readline())
+def CountDifferences(seq1, seq2):
+	"""Count the number of differences between two sequences."""
+	return sum(a != b for a, b in zip(seq1, seq2))
 
-seq1 = f1.read()
-seq2 = f2.read()
+def ProcessSequences(filePath):
+	sequences = {}
+	with open(filePath, 'r') as file:
+		currentLabel = ""
+		for line in file:
+			if line.startswith('>'):
+				currentLabel = line[1:].strip()  # Remove '>' and trailing newline
+				sequences[currentLabel] = ""
+			else:
+				sequences[currentLabel] += line.strip()
+	return sequences
 
-seq1 = seq1.replace('\n', '')
-n1 = len(seq1)
-seq2 = seq2.replace('\n', '')
-n2 = len(seq2)
-# ----------------------------------------------------
-# COUNTING DIFFERENCES
-# ----------------------------------------------------
-shorter = min(n1, n2)
-print('The shorter of the lengths {} and {} is {}'.format(n1, n2, shorter))
-count = 0
+def CreateDifferenceMatrix(sequences):
+	"""Create a matrix of differences between each pair of sequences."""
+	labels = list(sequences.keys())
+	n = len(labels)
+	differenceMatrix = [[0] * n for _ in range(n)]
 
-for x in range(shorter):
-    if seq1[x] == seq2[x]:
-        count += 1
+	for i in range(n):
+		for j in range(i + 1, n):
+			difference = CountDifferences(sequences[labels[i]], sequences[labels[j]])
+			differenceMatrix[i][j] = difference
+			differenceMatrix[j][i] = difference
 
-identity = (count / shorter) * 100
-# ----------------------------------------------------
-# PRINT PERCENT IDENTITY to one decimal place accuracy
-# ----------------------------------------------------
-print('The {} differences in {} bp means {:.1f}% identity'.format(count, shorter, identity))
+	return differenceMatrix, labels
+
+filePath = 'curedGapless.txt'
+sequences = ProcessSequences(filePath)
+differenceMatrix, labels = CreateDifferenceMatrix(sequences)
+
+# Print the matrix with labels
+print(" " * 20, end="")
+for label in labels:
+	print(f"{label[:15]:>15}", end="")
+print()
+for i, label in enumerate(labels):
+	print(f"{label[:15]:<20}", end="")
+	for j in range(len(labels)):
+		print(f"{differenceMatrix[i][j]:>15}", end="")
+	print()
 
 
-def jukes (D):
-    """ Calculating K value from D and returning """
-    K = (3/4)* math.log(((1-(4/3))*D), 2 )
-    return (K) 
+
+# def jukes (D):
+# 	""" Calculating K value from D and returning """
+# 	K = (3/4)* math.log(((1-(4/3))*D), 2 )
+# 	return (K) 
