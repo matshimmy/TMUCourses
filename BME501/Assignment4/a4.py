@@ -1,3 +1,5 @@
+import math
+
 f1 = open('curedGapless.txt')
 f2 = open('m2-9.txt')
 # ----------------------------------------------------
@@ -29,3 +31,9 @@ identity = (count / shorter) * 100
 # PRINT PERCENT IDENTITY to one decimal place accuracy
 # ----------------------------------------------------
 print('The {} differences in {} bp means {:.1f}% identity'.format(count, shorter, identity))
+
+
+def jukes (D):
+    """ Calculating K value from D and returning """
+    K = (3/4)* math.log(((1-(4/3))*D), 2 )
+    return (K) 
