@@ -49,3 +49,43 @@ title("Derived Signal");
 xlabel("Time");
 ylabel("Amplitude");
 grid;
+%% A.4
+SignalInput=out.simoutA4(:,1);
+T1=out.simoutA4(:,2);
+T2=out.simoutA4(:,3);
+T3=out.simoutA4(:,4);
+T4=out.simoutA4(:,5);
+
+subplot(5,1,1);
+plot(out.tout, SignalInput);
+title("Original Sine Wave Signal");
+xlabel("Time");
+ylabel("Amplitude");
+grid;
+
+subplot(5,1,2);
+plot(out.tout, T1);
+title("T1 Signal");
+xlabel("Time");
+ylabel("Amplitude");
+grid;
+
+subplot(5,1,3);
+plot(out.tout, T2);
+title("T2 Signal");
+xlabel("Time");
+ylabel("Amplitude");
+
+grid;subplot(5,1,4);
+plot(out.tout, T3);
+title("T3 Signal");
+xlabel("Time");
+ylabel("Amplitude");
+grid;
+
+subplot(5,1,5);
+plot(out.tout, T4);
+title("T4 Signal");
+xlabel("Time");
+ylabel("Amplitude");
+grid;
