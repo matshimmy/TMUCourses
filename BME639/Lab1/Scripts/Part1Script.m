@@ -116,3 +116,24 @@ dcm = datacursormode;
 dcm.Enable = 'on';
 dcm.DisplayStyle = 'window';
 hold off
+
+
+
+
+
+
+%% C.1
+
+figure
+hold on
+plot(out.FOLstep , 'lineWidth', 2.25);
+xlabel('Time (s)');
+ylabel('Amplitude');
+title('Step Function & First Order System', 'FontSize',12);
+legend ('Step Function', 'First Order System');
+grid on;
+ylim([-0.1 1.1]);
+dcm = datacursormode;
+dcm.Enable = 'on';
+dcm.DisplayStyle = 'window';
+hold off
