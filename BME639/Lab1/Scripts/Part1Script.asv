@@ -99,20 +99,13 @@ hold off
 
 %% B.1
 
-% time = out.tout(:,1);
-% step = out.Fstep(:,1);
-% response = out.Fstep(:,2);
-
-figure
-hold on
-plot(out.Fstep , 'lineWidth', 2.25);
-xlabel('Time (s)');
-ylabel('Amplitude');
-title('Step Function & First Order System', 'FontSize',12);
-legend ('Step Function', 'First Order System');
+plot(out.time,out.Fstep)
+xlabel('time (s)')
+ylabel('amplitude')
+title('Step Function & First Order System')
+legend ('Step Function', 'First Order System')
 grid on;
-ylim([-0.1 1.1]);
+ylim([-0.2 1.2]);
 dcm = datacursormode;
 dcm.Enable = 'on';
 dcm.DisplayStyle = 'window';
-hold off
