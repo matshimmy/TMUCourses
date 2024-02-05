@@ -34,13 +34,11 @@ hold off
 
 %% B2
 k2 = [1 2 3];
-"K = 2"
+out = ""
 roots (k2)
 
 k5 = [1 2 6]; 
-"K = 5"
 roots (k5)
 
 k10 = [1 2 11];
-"K = 10"
 roots (k10)
