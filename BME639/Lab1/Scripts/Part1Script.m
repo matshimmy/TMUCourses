@@ -112,14 +112,10 @@ title('Step Function & First Order System', 'FontSize',12);
 legend ('Step Function', 'First Order System');
 grid on;
 ylim([-0.1 1.1]);
-dcm = datacursormode;
-dcm.Enable = 'on';
-dcm.DisplayStyle = 'window';
+% dcm = datacursormode;
+% dcm.Enable = 'on';
+% dcm.DisplayStyle = 'window';
 hold off
-
-
-
-
 
 
 %% C.1
@@ -133,13 +129,63 @@ plot(out.time(:,1),out.FOLstep(:,2) , 'lineWidth', 2.25);
 
 xlabel('Time (s)');
 ylabel('Amplitude');
-title('Step Function & First Order System', 'FontSize',12);
+title('Step Function & First Order System Open Loop', 'FontSize',12);
 legend ('Step Function', 'First Order System');
 grid on;
 
-dcm = datacursormode;
-dcm.Enable = 'on';
-dcm.DisplayStyle = 'window';
+% dcm = datacursormode;
+% dcm.Enable = 'on';
+% dcm.DisplayStyle = 'window';
+hold off
+
+%% C.2
+
+figure
+hold on
+
+plot(out.time(:,1),out.FCLstep(:,1) , 'lineWidth', 2.25);
+plot(out.time(:,1),out.FCLstep(:,2) , 'lineWidth', 2.25);
+
+
+xlabel('Time (s)');
+ylabel('Amplitude');
+title('Step Function & First Order System Closed Loop', 'FontSize',12);
+legend ('Step Function', 'First Order System');
+grid on;
+
+% dcm = datacursormode;
+% dcm.Enable = 'on';
+% dcm.DisplayStyle = 'window';
 hold off
 
 
+%% C.4
+
+figure
+hold on
+
+subplot(3,1,1);
+plot(out.time(:,1),out.FOLstepControl(:,1) , 'lineWidth', 2.25);
+title("Control Signal u(t)");
+xlabel("Time (s)");
+ylabel("Amplitude");
+grid;
+
+subplot(3,1,2);
+plot(out.time(:,1),out.FOLstepControl(:,2) , 'lineWidth', 2.25);
+title("First Order System Open Loop");
+xlabel("Time (s)");
+ylabel("Amplitude");
+grid;
+
+subplot(3,1,3);
+plot(out.time(:,1),out.FCLstepControl(:,2) , 'lineWidth', 2.25);
+title("First Order System Closed Loop");
+xlabel("Time (s)");
+ylabel("Amplitude");
+grid;
+
+% dcm = datacursormode;
+% dcm.Enable = 'on';
+% dcm.DisplayStyle = 'window';
+hold off
