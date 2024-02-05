@@ -189,3 +189,74 @@ grid;
 % dcm.Enable = 'on';
 % dcm.DisplayStyle = 'window';
 hold off
+%% C.51
+
+figure
+hold on
+
+subplot(4,1,1);
+plot(out.time(:,1),out.FOLstepC51(:,1) , 'lineWidth', 2.25);
+title("Open Loop Input");
+xlabel("Time (s)");
+ylabel("Amplitude");
+grid;
+
+subplot(4,1,2);
+plot(out.time(:,1),out.FOLstepC51(:,2) , 'lineWidth', 2.25);
+title("First Order System Open Loop");
+xlabel("Time (s)");
+ylabel("Amplitude");
+grid;
+
+subplot(4,1,3);
+plot(out.time(:,1),out.FCLstepC51(:,1) , 'lineWidth', 2.25);
+title("Closed Loop Input");
+xlabel("Time (s)");
+ylabel("Amplitude");
+xlim([0 10]);
+grid;
+
+subplot(4,1,4);
+plot(out.time(:,1),out.FCLstepC51(:,2) , 'lineWidth', 2.25);
+title("First Order System Closed Loop");
+xlabel("Time (s)");
+ylabel("Amplitude");
+xlim([0 10])
+grid;
+
+% dcm = datacursormode;
+% dcm.Enable = 'on';
+% dcm.DisplayStyle = 'window';
+hold off
+
+%% C.52
+figure
+hold on
+
+subplot(4,1,1);
+plot(out.time(:,1),out.FOLstepC52(:,1) , 'lineWidth', 2.25);
+title("Open Loop Input");
+xlabel("Time (s)");
+ylabel("Amplitude");
+grid;
+
+subplot(4,1,2);
+plot(out.time(:,1),out.FOLstepC52(:,2) , 'lineWidth', 2.25);
+title("First Order System Open Loop");
+xlabel("Time (s)");
+ylabel("Amplitude");
+grid;
+
+subplot(4,1,3);
+plot(out.time(:,1),out.FCLstepC52(:,1) , 'lineWidth', 2.25);
+title("Closed Loop Input");
+xlabel("Time (s)");
+ylabel("Amplitude");
+grid;
+
+subplot(4,1,4);
+plot(out.time(:,1),out.FCLstepC52(:,2) , 'lineWidth', 2.25);
+title("First Order System Closed Loop");
+xlabel("Time (s)");
+ylabel("Amplitude");
+grid;
