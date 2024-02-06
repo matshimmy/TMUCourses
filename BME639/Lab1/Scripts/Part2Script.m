@@ -131,24 +131,31 @@ plot(out.time,out.TOstepK2(:,1:2));
 xlabel('time (s)')
 ylabel('amplitude')
 title('Input and Output of Third-Order System with K = 2')
+legend
 grid on
+
 subplot(4,1,2)
 plot(out.time,out.TOstepK5(:,1:2));
 xlabel('time (s)')
 ylabel('amplitude')
 title('Input and Output of Third-Order System with K = 5')
+legend
 grid on
+
 subplot(4,1,3)
 plot(out.time,out.TOstepK10(:,1:2));
 xlabel('time (s)')
 ylabel('amplitude')
 title('Input and Output of Third-Order System K = 10')
-
+legend
 grid on
+
 subplot(4,1,4)
 plot(out.time,out.TOstep8(:,1:2));
 xlabel('time (s)')
 ylabel('amplitude')
 title('Input and Output of Third-Order System with K = 8 (Marginally Stable)')
+legend
 grid on
+
 hold off
