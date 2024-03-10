@@ -50,3 +50,23 @@ title ('Voltage-To-Speed with a PI Controller Vs Time')
 legend('Square Wave Input','Voltage to Speed with PI Controller')
 grid;
 hold off
+%% A.2
+numerator = [1 1];
+denominator = [0.1 1];
+Gc = tf(numerator,denominator);
+
+% Find poles and zeros
+poles = pole(Gc);
+zeros = zero(Gc);
+
+% Display poles and zeros
+disp('Poles:');
+disp(poles);
+disp('Zeros:');
+disp(zeros);
+
+% Plot Bode diagram
+figure;
+bode(Gc);
+grid on;
+title('Bode Diagram of the Lead Compensator');
