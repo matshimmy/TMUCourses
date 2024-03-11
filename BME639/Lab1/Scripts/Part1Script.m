@@ -253,7 +253,7 @@ title("Closed Loop Input");
 xlabel("Time (s)");
 ylabel("Amplitude");
 grid;
-
+%%
 subplot(4,1,4);
 plot(out.time(:,1),out.FCLstepC52(:,2) , 'lineWidth', 2.25);
 title("First Order System Closed Loop");

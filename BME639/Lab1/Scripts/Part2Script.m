@@ -151,6 +151,7 @@ legend
 grid on
 
 subplot(4,1,4)
+%%
 plot(out.time,out.TOstep8(:,1:2));
 xlabel('time (s)')
 ylabel('amplitude')
