@@ -46,8 +46,8 @@ plot(out.time,out.LComp(:,2), 'Color','#DB435E' , 'lineWidth', 1.25)
 
 xlabel('Time (s)')
 ylabel('Amplitude')
-title ('Voltage-To-Speed with a PI Controller Vs Time')
-legend('Step Input','Voltage to Speed with PI Controller')
+title ('Output of a system with Lag Compensator')
+legend('Square wave input','System Output')
 grid;
 hold off
 
@@ -80,8 +80,8 @@ plot(out.time,out.SOlead(:,2), 'Color','#DB435E' , 'lineWidth', 1.25)
 
 xlabel('Time (s)')
 ylabel('Amplitude')
-title ('Voltage-To-Speed with a PI Controller Vs Time')
-legend('Step Input','Voltage to Speed with PI Controller')
+title ('Output of a second order system with Lead Compensator')
+legend('Square wave input','System output')
 grid;
 hold off
 %% B.2
@@ -130,8 +130,8 @@ plot(out.time,out.LagComp(:,2), 'Color','#DB435E' , 'lineWidth', 1.25)
 
 xlabel('Time (s)')
 ylabel('Amplitude')
-title ('Voltage-To-Speed with a PI Controller Vs Time')
-legend('Step Input','Voltage to Speed with PI Controller')
+title ('Output of a system with Lag Compensator')
+legend('Square wave input','System Output')
 grid;
 hold off
 
@@ -148,3 +148,73 @@ figure
 bode (LagCompensator)
 title('Lag Compensator Bode Diagram')
 grid on;
+
+%% D.1
+
+figure
+hold on
+plot(out.time,out.SOlag(:,1) , 'Color', '#487F9C', 'lineWidth', 1.25)
+plot(out.time,out.SOlag(:,2), 'Color','#DB435E' , 'lineWidth', 1.25)
+
+xlabel('Time (s)')
+ylabel('Amplitude')
+title ('Output of a second order system with Lag Compensator')
+legend('Square wave input','System Output')
+grid;
+hold off
+
+%% D.2
+
+num = [50 150];
+den = [1 10.3 78 157.5];
+
+sys_with_lag = tf (num, den);
+figure
+stepplot(sys_with_lag)
+title ("Step Response for Lead Compensator")
+grid on;
+
+%% D.3
+
+%Step Response for k=2 and Lag Compensator
+sys_K2lag = tf (num, den);
+figure
+stepplot(sys_K2lag)
+title('Step Response with Lag Compensator (k=2)')
+grid on;
+%Step Response for k=2 Closed Loop System
+num1 = 50;
+den1 = [1 10 75];
+sys_K2 = tf (num1, den1);
+figure
+stepplot(sys_K2)
+title('Step Response for a Closed Loop System (k=2)')
+grid on;
+%Step Response for k=20 Closed Loop System 
+num2 = 500;
+den2 = [1 10 525];
+sys_K20= tf (num2, den2);
+figure
+stepplot(sys_K20)
+title('Step Response for a Closed Loop System (k=20)')
+grid on;
+
+%% D.4
+
+%Bode Diagram
+sys_K2lag = tf (num, den);
+figure
+bode (sys_K2lag)
+hold on
+bode (sys_K2)
+title('Lag Compensator with a Second Order System vs Second Order System Bode Diagram')
+grid on
+legend('Lag Compensator', 'No Lag Compensator')
+hold off;
+%Phase and Gain Margin
+figure
+title ('Lag Compensator in a Closed Loop System')
+margin (sys_K2lag);
+figure
+title ('Closed Loop System with a Gain of 2')
+margin (sys_K2);
