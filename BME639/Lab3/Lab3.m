@@ -24,15 +24,11 @@ PI_den = [2 6 6 2 0];
 G1 = tf(PI_num, PI_den);
 K1 = 1;
 PI_tf = feedback(G1, K1)
-hold on
-figure
 
 stepplot(PI_tf);
 stepinfo(PI_tf)
 title('Stepplot for KP = 2 Ti = 4, PI Controller')
 grid;
-
-
 
 % P controller
 P_num = 2;
@@ -48,7 +44,9 @@ title('Stepplot for KP = 2, P Controller')
 hold off
 grid;
 %
+figure
 stepplot(P_tf, PI_tf);
+grid;
 legend;
 
 %% A.4
