@@ -229,3 +229,37 @@ title('PD Controller, Pi Controller, and PID Controller Bode Plots With Ti = 4, 
 legend('PID Controller','PI Controller','PD Controller')
 grid
 hold off
+
+%% D.1
+
+% Plot reference input and output
+squareWaveD1 = out.TOMS(:,1);
+ZielgerTF = out.TOMS(:,2);
+figure
+hold on
+plot(out.time, squareWaveD1, 'Color', 'b', 'lineWidth', 1.25);
+plot(out.time, ZielgerTF, 'lineWidth', 2.25);
+title('Zielger-Nichols Marginal Stability at Ku = 8');
+legend('Square Wave Input','Output');
+grid;
+hold off
+
+%% D.3
+squareWaveD3 = out.TOPIDZN(:,1);
+tranFunctionD3 = out.TOPIDZN(:,2);
+hold on
+plot(out.time, squareWaveD3);
+plot(out.time, tranFunctionD3);
+title('PID Controller with Kp = 4.8, Ti = 1.83 and Td = 0.46');
+legend('Square Wave Input','Transfer Function');
+grid
+hold off
+
+num_PID = [39.0846 900.48 884.064];  
+den_PID = [8.148 207.444 573.444 557.143 183 0];
+G9 = tf(num_PID, den_PID);
+K9 = 1;
+TransferFunction_PID = feedback(G9, K9)
+stepinfo(TransferFunction_PID)
+stepplot(TransferFunction_PID)
+title('Stepplot for Kp = 4.8 Ti = 1.83 Td = 0.46, PID Controller');
