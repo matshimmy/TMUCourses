@@ -255,8 +255,9 @@ legend('Square Wave Input','Transfer Function');
 grid
 hold off
 
-num_PID = [39.0846 900.48 884.064];  
-den_PID = [8.148 207.444 573.444 557.143 183 0];
+%%
+num_PID = [4.444704 1.876 4.8];  
+den_PID = [0.08418 2.08254 5.74254 5.57418 1.83 0];
 G9 = tf(num_PID, den_PID);
 K9 = 1;
 TransferFunction_PID = feedback(G9, K9)
