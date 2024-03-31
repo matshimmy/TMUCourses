@@ -165,9 +165,9 @@ grid;
 hold off
 
 %PD Controller - Td = 2
-num7 = [8.8 4];
-den7 = [0.2 1.6 3.6 3.2 1];
-G7 = tf(num7, den7);
+num__PD = [8.8 4];
+den__PD = [0.2 1.6 3.6 3.2 1];
+G7 = tf(num__PD, den__PD);
 K7 = 1;
 TransferFunction2 = feedback(G7, K7)
 figure(2)
@@ -197,3 +197,37 @@ legend('Td = 0.1','Td = 1', 'Td = 2')
 grid;
 hold off
 
+%% C.2
+close all
+clc
+
+squareWave3 = out.TOPID(:,1);
+tranFunctionC = out.TOPID(:,2);
+hold on
+plot(out.time, squareWave3);
+plot(out.time, tranFunctionC);
+title('PID Controller with Kp = 4, Ti = 4 and Td = 1');
+legend('Square Wave Input','Transfer Function');
+grid
+hold off
+%% C.3 
+
+num_PID = [17.6 16.4 4];  
+den_PID = [0.4 5.2 13.2 12.4 4 0];
+G9 = tf(num_PID, den_PID);
+K9 = 1;
+TransferFunction_PID = feedback(G9, K9)
+stepinfo(TransferFunction_PID)
+stepplot(TransferFunction_PID)
+title('Stepplot for KP = 4 Td = 1 Ti = 4, PID Controller');
+
+%% C.5
+
+hold on
+bode([17.6 16.4 4],[0.4 4 0])
+bode([4 1],[1 0])
+bode([4.4 4],[0.1 1])
+title('PD Controller, Pi Controller, and PID Controller Bode Plots With Ti = 4, Td = 1, and Kp = 4')
+legend('PID Controller','PI Controller','PD Controller')
+grid
+hold off
