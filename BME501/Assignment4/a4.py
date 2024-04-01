@@ -42,7 +42,7 @@ def CreateJukesMatrix(differenceMatrix, seqLength, labels):
     for i in range(n):
         for j in range(n):
             d = differenceMatrix[i][j]
-            differenceMatrix[i][j] = round(Jukes(d/seqLength)*seqLength, 2)
+            differenceMatrix[i][j] = round(Jukes(d/seqLength)*seqLength, 1)
 
     return differenceMatrix
 
