@@ -231,6 +231,8 @@ grid
 hold off
 
 %% D.1
+clc
+close all
 
 % Plot reference input and output
 squareWaveD1 = out.TOMS(:,1);
@@ -245,6 +247,9 @@ grid;
 hold off
 
 %% D.3
+clc 
+close all
+
 squareWaveD3 = out.TOPIDZN(:,1);
 tranFunctionD3 = out.TOPIDZN(:,2);
 hold on
@@ -255,7 +260,7 @@ legend('Square Wave Input','Transfer Function');
 grid
 hold off
 
-%%
+%
 num_PID = [4.444704 1.876 4.8];  
 den_PID = [0.08418 2.08254 5.74254 5.57418 1.83 0];
 G9 = tf(num_PID, den_PID);
