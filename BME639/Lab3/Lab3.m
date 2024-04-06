@@ -171,7 +171,7 @@ TransferFunction2 = feedback(G7, K7)
 figure(2)
 stepplot(TransferFunction2);
 stepinfo(TransferFunction2)
-title('Stepplot for KP = 4 Ti = 0.1, PD Controller')
+title('Stepplot for KP = 4 Ti = 2, PD Controller')
 grid
 
 %PD Controller - Td = 0.1
@@ -183,7 +183,7 @@ TransferFunction01 = feedback(G8, K8)
 figure(3)
 stepplot(TransferFunction01);
 stepinfo(TransferFunction01)
-title('Stepplot for KP = 4 Ti = 2, PD Controller')
+title('Stepplot for KP = 4 Ti = 0.1, PD Controller')
 grid
 %% B.5 
 hold on
@@ -260,7 +260,6 @@ legend('Square Wave Input','Transfer Function');
 grid
 hold off
 
-%
 num_PID = [4.444704 1.876 4.8];  
 den_PID = [0.08418 2.08254 5.74254 5.57418 1.83 0];
 G9 = tf(num_PID, den_PID);
@@ -268,4 +267,5 @@ K9 = 1;
 TransferFunction_PID = feedback(G9, K9)
 stepinfo(TransferFunction_PID)
 stepplot(TransferFunction_PID)
+grid;
 title('Stepplot for Kp = 4.8 Ti = 1.83 Td = 0.46, PID Controller');
