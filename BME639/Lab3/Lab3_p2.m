@@ -10,12 +10,9 @@ Lr = 0.216; % length of arm (pivot to tip)
 lr = 0.0619; % length of arm (pivot to centre of mass)
 Br = 0.1135; % rotary arm viscous damping coefficient
 Jr = 9.98 * 10^(-4); % rotart arm moment of inertia (about COM)
-g = 9.81; % earth being a bitch
+g = 9.81; % gravity
 
-
-Jt = (Jp*Mp*(Lr^2)) + Jr*Jp + (1/4)*Jr*Mp*(Lp^2); %total inertia i think
-
-%Calculating Numerical Values of Matrices
+Jt = (Jp*Mp*(Lr^2)) + Jr*Jp + (1/4)*Jr*Mp*(Lp^2); 
 
 % Calculating Numerical Values of Matrices
 a = ((Mp^2)*((Lp/2)^2)*Lr*g)/Jt;
@@ -34,9 +31,7 @@ B = [0; 0; g; h];
 C = [1 0 0 0; 0 1 0 0];
 D = [0; 0];
 
-
 % Displaying Matrices with Better Formatting
-clc
 fprintf('Matrix A:\n');
 fprintf('%8.4f %8.4f %8.4f %8.4f\n', A');
 fprintf('\nMatrix B:\n');
@@ -51,7 +46,7 @@ clc
 % Characteristic Equation
 charEQ = charpoly(A);
 fprintf('Characteristic Equation of Matrix A is:\n\n');
-fprintf('%.1fs   ', (charEQ)); 
+fprintf('%.1f   ', (charEQ)); 
 fprintf('\n\n\n'); % Adds a newline for better separation
 
 % Finding and Displaying Eigenvalues
