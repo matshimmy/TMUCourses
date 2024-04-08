@@ -24,7 +24,7 @@ f = (-Bp*(Jr+Mp*Lr^2))/Jt;
 
 A = [0 0 1 0; 0 0 0 1; 0 a b c; 0 d e f];
 
-g = (Jp+Mp*(Lp)^2)/Jt;
+g = (Jp+Mp*(Lp/2)^2)/Jt;
 h = (Mp*(Lp/2)*Lr)/Jt;
 
 B = [0; 0; g; h];
